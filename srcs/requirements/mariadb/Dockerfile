@@ -4,7 +4,6 @@ ARG MARIADB_ROOT_PASSWORD
 
 ARG WORDPRESS_DB_USER
 ARG WORDPRESS_DB_PASSWORD
-ARG WORDPRESS_DB_NAME
 
 RUN apk add mariadb mariadb-client --no-cache  \
 	&& mkdir /var/run/mysqld  \
