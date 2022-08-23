@@ -10,28 +10,22 @@ else
     cat << EOF > /tmp/setup.sql
 USE mysql;
 FLUSH PRIVILEGES;
-ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';
-CREATE DATABASE $MYSQL_DB_NAME;
-GRANT ALL ON wordpress.* TO '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';
+ALTER USER 'root'@'localhost' IDENTIFIED BY '$MARIADB_ROOT_PASSWORD';
+CREATE DATABASE $WORDPRESS_DB_NAME;
+GRANT ALL ON $WORDPRESS_DB_NAME.* TO '$WORDPRESS_DB_USER'@'%' IDENTIFIED BY '$WORDPRESS_DB_PASSWORD';
 FLUSH PRIVILEGES;
 EOF
 
-    echo "[MYSQL - build] Setting up mariadb"
-    # $SQL_CMD < /tmp/setup.sql
+    echo "[MARIADB - build] Setting up mariadb"
 
-    echo "[MYSQL - build] Setting up the wordpress database"
+    echo "[MARIADB - build] Setting up the wordpress database"
     /usr/share/mariadb/mysql.server start
     mysql < /tmp/setup.sql
-    mysql -p$MYSQL_ROOT_PASSWORD -h 127.0.0.1 < /tmp/wordpress.sql
+    mysql -p$MARIADB_ROOT_PASSWORD -h 127.0.0.1 < /tmp/wordpress.sql
     /usr/share/mariadb/mysql.server stop
 
-    #wait_server_startup
-
-    # echo $SQL_SETUP | mariadb -uroot
-
-    echo "[MYSQL - build] Done!"
+    echo "[MARIADB - build] Done!"
 
 fi
 
-# mysqld --user=mysql
 exec /usr/bin/mysqld --user=mysql --console --skip-name-resolve --skip-networking=0

@@ -20,13 +20,13 @@
 
 // ** Configurações do banco de dados - Você pode pegar estas informações com o serviço de hospedagem ** //
 /** O nome do banco de dados do WordPress */
-define( 'DB_NAME', getenv('MYSQL_DB_NAME') );
+define( 'DB_NAME', getenv('WORDPRESS_DB_NAME') );
 
 /** Usuário do banco de dados MySQL */
-define( 'DB_USER', getenv('MYSQL_USER'));
+define( 'DB_USER', getenv('WORDPRESS_DB_USER'));
 
 /** Senha do banco de dados MySQL */
-define( 'DB_PASSWORD', getenv('MYSQL_PASSWORD'));
+define( 'DB_PASSWORD', getenv('WORDPRESS_DB_PASSWORD'));
 
 /** Nome do host do MySQL */
 define( 'DB_HOST', 'ft_mariadb' );
