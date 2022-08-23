@@ -8,12 +8,12 @@ VOLUMES = $(WP_VOLUME) \
 		  $(DB_VOLUME)
 
 $(DATA_DIR):
-	sudo mkdir $(USER_DIR)
-	sudo chown -R $$USER $(USER_DIR)
+	sudo mkdir -p $(USER_DIR)
+	sudo chown $$USER -R $(USER_DIR)
 	mkdir -p $(DATA_DIR)
 
 $(VOLUMES):
 	mkdir -p $@
 
 purge:
-	rm -rf $(USER_DIR)
+	sudo rm -rf $(USER_DIR)
