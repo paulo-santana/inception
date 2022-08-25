@@ -1,0 +1,51 @@
+services:
+  ft_nginx:
+    depends_on:
+      - ft_wordpress
+    image: nginx
+    container_name: ft_nginx
+    build: ./requirements/nginx/
+    ports:
+      - "443:443"
+    networks:
+      - wp-network
+    volumes:
+      - wp-volume:/var/www/wordpress
+  ft_wordpress:
+    image: wordpress
+    depends_on:
+      - ft_mariadb
+    container_name: ft_wordpress
+    build: ./requirements/wordpress/
+    networks:
+      - wp-network
+    volumes:
+      - wp-volume:/var/www/wordpress
+    env_file:
+      - .env
+  ft_mariadb:
+    image: mariadb
+    container_name: ft_mariadb
+    build: ./requirements/mariadb/
+    networks:
+      - wp-network
+    volumes:
+      - mariadb-volume:/var/lib/mysql
+    env_file:
+      - .env
+volumes:
+  wp-volume:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/psergio-/data/wordpress/
+      o: bind
+  mariadb-volume:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/psergio-/data/mariadb/
+      o: bind
+
+networks:
+  wp-network: {}

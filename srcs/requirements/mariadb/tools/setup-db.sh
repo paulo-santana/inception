@@ -23,6 +23,7 @@ EOF
     mysql < /tmp/setup.sql
     mysql -p$MARIADB_ROOT_PASSWORD -h 127.0.0.1 < /tmp/wordpress.sql
     /usr/share/mariadb/mysql.server stop
+    rm -rf /tmp/wordpress.sql
 
     echo "[MARIADB - build] Done!"
 

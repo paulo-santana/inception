@@ -7,8 +7,12 @@ DB_VOLUME = $(DATA_DIR)/mariadb
 VOLUMES = $(WP_VOLUME) \
 		  $(DB_VOLUME)
 
-all:  $(VOLUMES)
+up:  $(VOLUMES)
 	sudo sed -i '/\(\<psergio-\.42\.fr\>\)/!s/\(127.0.0.1\)\(.\+\)/\1\2 psergio-.42.fr/' /etc/hosts
+	docker-compose -f ./srcs/docker-compose.yml up -d --build
+
+down:
+	docker-compose -f ./srcs/docker-compose.yml down
 
 $(DATA_DIR):
 	sudo mkdir -p $(USER_DIR)
@@ -16,12 +20,16 @@ $(DATA_DIR):
 	mkdir -p $(DATA_DIR)
 
 $(VOLUMES): $(DATA_DIR)
-	mkdir -p $@
+	mkdir -p $@	
 
 fclean:
 	sudo sed -i '/\(127.0.0.1\)/s/ psergio-.42.fr//' /etc/hosts
 
-re: fclean all
+re: fclean up
 
-purge:
-	sudo rm -rf $(USER_DIR)
+purge: down
+	sudo rm -rf $(USER_DIR); \
+	docker rm $$(docker ps -a -q); \
+	docker rmi $$(docker image ls -a -q); \
+	docker volume rm $$(docker volume ls -q); \
+	docker network rm $$(docker network ls -q)
