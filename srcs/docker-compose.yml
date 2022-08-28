@@ -11,6 +11,7 @@ services:
       - wp-network
     volumes:
       - wp-volume:/var/www/wordpress
+    restart: on-failure
   ft_wordpress:
     image: wordpress
     depends_on:
@@ -23,6 +24,7 @@ services:
       - wp-volume:/var/www/wordpress
     env_file:
       - .env
+    restart: on-failure
   ft_mariadb:
     image: mariadb
     container_name: ft_mariadb
@@ -33,6 +35,7 @@ services:
       - mariadb-volume:/var/lib/mysql
     env_file:
       - .env
+    restart: on-failure
 volumes:
   wp-volume:
     driver: local
