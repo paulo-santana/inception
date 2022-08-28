@@ -394,13 +394,6 @@ CREATE TABLE `wp_users` (
 -- Dumping data for table `wp_users`
 --
 
-LOCK TABLES `wp_users` WRITE;
-/*!40000 ALTER TABLE `wp_users` DISABLE KEYS */;
-INSERT INTO `wp_users` VALUES (1,'Paulo','$P$B9ok58yIlzcwR1NQVnctnAek9km2Ee0','paulo','paulo@example.com','https://psergio-.42.fr','2022-08-25 22:09:10','',0,'Paulo'),(2,'santana','$P$BtQPtLBtOVGCcq2d.vilzWisRhLkWr0','santana','santana@example.com','','2022-08-25 22:18:55','1661465935:$P$ByWGoBAJJxHcnkEx7wvpO7qLhqikcc/',0,'San Tana');
-/*!40000 ALTER TABLE `wp_users` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
